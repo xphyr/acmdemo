@@ -1,0 +1,55 @@
+apiVersion: kubevirt.io/v1alpha3
+kind: VirtualMachineInstanceReplicaSet
+metadata:
+  name: vmi-replicaset-fedora
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: simplevm
+      kubevirt.io/vmReplicaSet: vmi-replicaset-fedora
+  template:
+    metadata:
+      labels:
+        kubevirt.io/vmReplicaSet: vmi-replicaset-fedora
+    spec:
+      domain:
+        devices:
+          disks:
+            - disk:
+                bus: virtio
+              name: containerdisk
+            - disk:
+                bus: virtio
+              name: cloudinitdisk
+          interfaces:
+          - name: default
+            bridge: {}
+        resources:
+          requests:
+            memory: 1024M
+      livenessProbe:
+        initialDelaySeconds: 120
+        periodSeconds: 20
+        httpGet:
+          port: 1500
+        timeoutSeconds: 10
+      terminationGracePeriodSeconds: 0
+      networks:
+        - name: default
+          pod: {}
+      volumes:
+      - name: containerdisk
+        containerDisk:
+          image: kubevirt/fedora-cloud-container-disk-demo:latest
+      - cloudInitNoCloud:
+          userData: |-
+            #cloud-config
+            password: fedora
+            chpasswd: { expire: False }
+            bootcmd:
+              - setenforce 0
+              - dnf install -y nmap-ncat
+              - sh -c "/usr/bin/echo -e HTTP/1.1 200 OK\\\n\\\nHello World! from $(hostname) > /etc/helloworld"
+              - systemd-run --unit=httpserver nc -klp 1500 -e '/usr/bin/cat /etc/helloworld'
+        name: cloudinitdisk
