@@ -2,6 +2,8 @@ apiVersion: kubevirt.io/v1alpha3
 kind: VirtualMachineInstanceReplicaSet
 metadata:
   name: vmi-replicaset-fedora
+  labels:
+    app: simplevm
 spec:
   replicas: 3
   selector:

@@ -9,7 +9,7 @@ spec:
       - key: app  
         operator: In
         values:
-        - simplevm 
+        - vmapp 
   componentKinds:
   - group: app.ibm.com/v1alpha1
     kind: Subscription
