@@ -8,7 +8,6 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: simplevm
       kubevirt.io/vmReplicaSet: vmi-replicaset-fedora
   template:
     metadata:
