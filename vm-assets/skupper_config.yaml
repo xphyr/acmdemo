@@ -13,3 +13,5 @@ data:
 kind: ConfigMap
 metadata:
   name: skupper-site
+  labels:
+    app: simplevm

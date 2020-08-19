@@ -5,11 +5,14 @@ metadata:
   name: skupper-site-controller
   labels:
     application: skupper-site-controller
+    app: simplevm
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: skupper-site-controller
+  labels:
+    app: simplevm
 spec:
   replicas: 1
   selector:
@@ -37,6 +40,7 @@ kind: Role
 metadata:
   labels:
     application: skupper-site-controller
+    app: simplevm
   name: skupper-site-controller
 rules:
 - apiGroups:
@@ -94,6 +98,7 @@ kind: RoleBinding
 metadata:
   labels:
     application: skupper-site-controller
+    app: simplevm
   name: skupper-site-controller
 subjects:
 - kind: ServiceAccount
