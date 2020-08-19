@@ -1,0 +1,15 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: helloworld
+  labels:
+    app: simplevm
+spec:
+  host: helloworld-tstskupper.apps.acmdeploy1.aws.xphyrlab.net
+  port:
+    targetPort: helloworld
+  to:
+    kind: Service
+    name: helloworld
+    weight: 100
+  wildcardPolicy: None

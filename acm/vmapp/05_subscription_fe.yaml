@@ -1,0 +1,16 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: vmapp                           
+  namespace: simple-vmapp
+  labels:
+    app: vmapp
+  annotations:
+    apps.open-cluster-management.io/github-branch: master
+    apps.open-cluster-management.io/github-path: frontend
+spec:
+  channel:  simple-vmapp/vmapp
+  placement: 
+    placementRef: 
+      kind: PlacementRule
+      name: frontend     

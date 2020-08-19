@@ -1,0 +1,11 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  labels:
+    app: simplevm
+  name: frontend
+  namespace: simple-vmapp
+spec:
+  clusterSelector:
+    matchLabels:
+      simpleappfe: "true"
