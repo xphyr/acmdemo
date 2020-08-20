@@ -1,0 +1,16 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-auth-provider
+  namespace: open-cluster-management-policies
+spec:
+  object-templates:
+    - complianceType: musthave
+      objectDefinition:
+        data:
+          htpasswd: ""
+        kind: Secret
+        metadata:
+          name: htpass-secret
+          namespace: openshift-config

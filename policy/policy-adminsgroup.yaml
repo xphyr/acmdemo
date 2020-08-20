@@ -1,0 +1,53 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-admingroup
+  namespace: open-cluster-management-policies
+  annotations:
+    policy.open-cluster-management.io/standards: NIST-CSF
+    policy.open-cluster-management.io/categories: PR.AC Identity Management Authentication and Access Control
+    policy.open-cluster-management.io/controls: PR.AC-4 Access Control
+spec:
+  complianceType: musthave
+  remediationAction: enforce
+  disabled: false
+  object-templates:
+    - complianceType: musthave
+      objectDefinition:
+        kind: Group
+        apiVersion: user.openshift.io/v1
+        metadata:
+          name: cluster-admins
+        users:
+          - markd
+
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PlacementBinding
+metadata:
+  name: binding-policy-adminsgroup
+  namespace: open-cluster-management-policies
+placementRef:
+  name: placement-policy-adminsgroup
+  kind: PlacementRule
+  apiGroup: apps.open-cluster-management.io
+subjects:
+- name: policy-admingroup
+  kind: Policy
+  apiGroup: policy.open-cluster-management.io
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: placement-policy-adminsgroup
+  namespace: open-cluster-management-policies
+spec:
+  clusterConditions:
+  - status: "True"
+    type: ManagedClusterConditionAvailable
+  clusterSelector:
+    matchExpressions:
+    - key: vendor
+      operator: In
+      values:
+      - OpenShift
