@@ -11,15 +11,22 @@ spec:
   complianceType: musthave
   remediationAction: enforce
   disabled: false
-  object-templates:
-    - complianceType: musthave
-      objectDefinition:
-        kind: Group
-        apiVersion: user.openshift.io/v1
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
         metadata:
-          name: cluster-admins
-        users:
-          - markd
+          name: policy-admingroup
+        spec:
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                kind: Group
+                apiVersion: user.openshift.io/v1
+                metadata:
+                  name: cluster-admins
+                users:
+                  - markd
 
 ---
 apiVersion: policy.open-cluster-management.io/v1
