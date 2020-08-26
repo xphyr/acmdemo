@@ -21,7 +21,10 @@ We will store all our policies in the namespace "open-cluster-management-policie
 
 ```
 oc login
-oc create -f policy/policies-namespaces.yaml
-kustomize build policies/ | oc apply -f -
+oc create -f acm/policy/policies-namespaces.yaml
+kustomize build acm/policies/ | oc apply -f -
 ```
 
+## Scan for vulnerabilities
+
+tag a cluster with enforceSecureImages=true
