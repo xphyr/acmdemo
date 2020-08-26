@@ -21,14 +21,9 @@ patches:
 
 # list of Resource Config to be Applied
 resources:
+  - policy-adminsgroup.yaml
+  - policy-adminsgroup-rolebinding.yaml
   - policy-auth-provider.yaml
-  # - policy-console-link.yml
-  # - policy-scc.yaml
-  - dev-clusters-placementrule.yaml
-  - production-clusters-placementrule.yaml
-  - policy-namespace.yaml
-  - policy-rolebinding.yaml
-  - policy-imagemanifestvuln.yaml
   - policy-certificate.yaml
-  # - policy-role.yaml
-  # - policy-iam.yaml
+  - policy-imagemanifestvuln.yaml
+  - policy-namespace.yaml

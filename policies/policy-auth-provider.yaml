@@ -45,6 +45,7 @@ spec:
               name: htpass-secret
               namespace: openshift-config
             type: Opaque
+
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
@@ -71,8 +72,12 @@ spec:
     type: ManagedClusterConditionAvailable
   clusterSelector:
     matchExpressions:
-    - key: authenticationProfile
+    - key: vendor
       operator: In
       values:
-      - htpasswd
+      - OpenShift
+    - key: cloud 
+      operator: NotIn
+      values:
+      - VMWare
     matchLabels: {}
