@@ -3,6 +3,17 @@ source for acm demos
 
 ## Deploying a simple vm application
 
+
+
+```
+oc login
+cd acm/simpleapp
+oc apply -f .
+```
+
+
+## Deploying a multi-cluster application
+
 ```
 oc login
 cd acm/vmapp

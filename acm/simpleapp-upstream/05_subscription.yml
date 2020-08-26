@@ -1,0 +1,17 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: guestbook-upstream
+  namespace: guestbook-upstream
+  labels:
+    app: guestbook-upstream
+  annotations:
+    apps.open-cluster-management.io/github-path: guestbook-go
+    apps.open-cluster-management.io/github-branch: master
+spec:
+  channel: guestbook-upstream/guestbook-app-upstream-latest
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: guestbook-placement
