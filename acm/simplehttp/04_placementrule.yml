@@ -1,0 +1,11 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: httpd-placement
+  namespace: httpd-app
+spec:
+  clusterSelector:
+    matchExpressions: []
+    matchLabels:
+      purpose: development

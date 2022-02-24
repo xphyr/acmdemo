@@ -1,0 +1,17 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: squid-proxy-subscription
+  namespace: squid-proxy
+  labels:
+    app: squid-proxy
+  annotations:
+    apps.open-cluster-management.io/github-path: deploy
+    apps.open-cluster-management.io/github-branch: master
+spec:
+  channel: squid-proxy/squid-proxy-channel
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: squid-proxy-placement

@@ -1,0 +1,9 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: squid-proxy-channel
+  namespace: squid-proxy
+spec:
+  type: GitHub
+  pathname: https://github.com/xphyr/squidproxy.git
